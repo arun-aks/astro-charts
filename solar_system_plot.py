@@ -190,21 +190,18 @@ def plot_solar_sys_objects(ax, datetime=None, limiting_magnitude=3.0,
                   arrowprops={'arrowstyle': '<-', 'color': 'w'})
 
   if ecliptic_coords:
-    ax.set_xlabel('Ecliptic Latitude (degrees)')
-    ax.set_ylabel('Ecliptic Longitude (degrees)')
-  else:
-    ax.set_xlabel('Right Ascension (hours)')
-    ax.set_ylabel('Declination (degrees)')
-
-  ax.set_title('Sun, Moon and Planets at ' + f'{t.utc_strftime()}')
-
-  # Set xticks
-  if ecliptic_coords:
+    ax.set_xlabel('Ecliptic Longitude')
+    ax.set_ylabel('Ecliptic Latitude')
     ax.set_xticks(np.arange(0, 361, 30))
+    ax.xaxis.set_major_formatter('{x}$\degree$')
   else:
+    ax.set_xlabel('Right Ascension')
+    ax.set_ylabel('Declination')
     ax.set_xticks(np.arange(0, 25, 2))
+    ax.xaxis.set_major_formatter('{x}$^h$')
 
-  return
+  ax.yaxis.set_major_formatter('{x:0.0f}$\degree$')
+  ax.set_title('Sun, Moon and Planets at ' + f'{t.utc_strftime()}')
 
 
 if __name__ == "__main__":
